@@ -19,6 +19,10 @@ export class SleepTrackerService {
     return this.http.get<Record[]>(this.apiURL);
   }
 
+  getRecord(id: number) {
+    return this.http.get<Record>(`${this.apiURL}/${id}`);
+  }
+
   addRecord(record: Record) {
     return this.http.post<Record>(this.apiURL, record, this.httpHeaders);
   }

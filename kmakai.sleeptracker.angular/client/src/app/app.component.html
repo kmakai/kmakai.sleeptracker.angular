@@ -1,1 +1,5 @@
-
+<div class="container">
+  <h1 class="text-capitalize text-white my-4">Sleep Tracker</h1>
+  <app-form (onRecordAdded)="onRecordAdded($event)"></app-form>
+  <app-records-list [records]="sleepRecords"></app-records-list>
+</div>
