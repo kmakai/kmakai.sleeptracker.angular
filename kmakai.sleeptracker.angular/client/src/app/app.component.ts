@@ -9,22 +9,6 @@ import { SleepTrackerService } from './services/sleep-tracker.service';
 })
 export class AppComponent {
   title = 'client';
-  sleepRecords: Record[] = [];
 
   constructor(private sleepService: SleepTrackerService) {}
-
-  ngOnInit() {
-    this.sleepService.getRecords().subscribe((records) => {
-      this.sleepRecords = records;
-    });
-  }
-
-  getRecords() {
-    console.log('getRecords() called', this.sleepRecords);
-  }
-
-  onRecordAdded(record: Record) {
-    console.log('onRecordAdded() called', record);
-    this.sleepRecords.push(record);
-  }
 }

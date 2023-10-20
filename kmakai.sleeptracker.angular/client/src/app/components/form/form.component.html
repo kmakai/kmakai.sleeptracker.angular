@@ -1,35 +1,36 @@
 <form
   action=""
-  class="text-white my-2"
+  class="container text-white my-2"
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
 >
-  <div class="form-group my-4">
-    <label for="date">date</label>
-    <input
-      type="date"
-      class="form-control mt-2"
-      id="date"
-      formControlName="date"
-    />
-  </div>
+  <mat-form-field appearance="fill" class="form-group my-2">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
   <div class="form-group">
     <label for="hours" class="d-flex align-items-center"
       ><span class="fs-2 p-2">{{ range.value }}</span>
       <i class="fa-solid fa-bed ms-auto me-3 fs-2"></i>
       <span class="fs-2 fw-medium"> hours of sleep </span>
     </label>
-    <input
+    <mat-slider
       type="range"
-      class="form-control mt-2"
+      class="form-control-range w-100"
       id="hours"
-      #range
       min="4"
       max="16"
       value="4"
       step="0.25"
-      formControlName="hours"
-    />
+    >
+      <input matSliderThumb #range formControlName="hours" />
+    </mat-slider>
   </div>
-  <button type="submit" class="btn btn-dark mt-2">Submit</button>
+  <button type="submit" mat-raised-button color="primary" class="mt-2">
+    Submit
+  </button>
 </form>

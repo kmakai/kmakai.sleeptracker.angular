@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Record } from 'src/app/models/Record';
 import { SleepTrackerService } from 'src/app/services/sleep-tracker.service';
 import { Output, EventEmitter } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-form',
@@ -18,10 +19,12 @@ export class FormComponent {
 
   @Output() onRecordAdded = new EventEmitter<Record>();
 
-  constructor(private sleepService: SleepTrackerService) {}
+  constructor(
+    private sleepService: SleepTrackerService,
+    private sharedService: SharedService
+  ) {}
 
   onSubmit() {
-    console.log('Form submitted', this.form.value);
     const record: Record = {
       id: +this.form.value.id!,
       date: new Date(this.form.value.date!),
@@ -29,8 +32,7 @@ export class FormComponent {
     };
 
     this.sleepService.addRecord(record).subscribe((record) => {
-      console.log('Record added', record);
-      this.onRecordAdded.emit(record);
+      this.sharedService.recordAdded.emit(record);
     });
   }
 }
