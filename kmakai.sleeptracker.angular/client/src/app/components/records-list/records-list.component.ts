@@ -47,4 +47,12 @@ export class RecordsListComponent {
       this.getRecords();
     });
   }
+  applyFilter(eventValue: string) {
+    console.log(new Date(eventValue).toISOString().slice(0, 10));
+    this.dataSource.filter = new Date(eventValue).toISOString().slice(0, 10);
+  }
+
+  resetFilter() {
+    this.dataSource.filter = '';
+  }
 }
